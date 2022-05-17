@@ -36,9 +36,10 @@ app.post('/login', (req, res) => {
       if (error) throw error;
       if (results.length > 0) {
 				// Authenticate the user
-				request.session.loggedin = true;
-				request.session.username = username;
+				req.session.isLoggedIn = true;
+				req.session.username = username;
         //redirect to homepage
+        console.log(req.query)
         res.redirect(req.query.redirect_url ? req.query.redirect_url : '/')
     } else {
     res.render('login', {error: 'Username or password is incorrect'});
@@ -54,10 +55,12 @@ app.get('/logout', (req, res) => {
 
 /** Simulated bank functionality */
 app.get('/', (req, res) => {
+  console.log(req.session);
   res.render('index', {isLoggedIn: req.session.isLoggedIn});
 });
 
 app.get('/balance', (req, res) => {
+  //did 
   if (req.session.isLoggedIn === true) {
     res.send('Your account balance is $1234.52');
   } else {

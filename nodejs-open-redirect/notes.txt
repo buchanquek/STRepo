@@ -1,0 +1,3 @@
+Find out:
+How does a html form work, esp "action" attribute, "method" sttribute
+Node js - how to do a redirect
